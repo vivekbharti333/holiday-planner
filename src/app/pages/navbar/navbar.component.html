@@ -1,0 +1,21 @@
+<div class="navbar p-3">
+  <div class="d-flex profile-info gap-4 mb-4 align-items-center">
+    <img src="assets/profile.svg" alt="" width="80px">
+    <div>
+      <h2>Sam Smith</h2>
+      <span>View Profile</span>
+    </div>
+  </div>
+  <ul>
+    <li class="active">
+      <mat-icon>directions_car</mat-icon>
+      <span>My Booking</span>
+    </li>
+  </ul>
+  <ul>
+    <li *ngFor="let menu of menuList">
+      <mat-icon>{{menu.icon}}</mat-icon>
+      <span>{{menu.label}}</span>
+    </li>
+  </ul>
+</div>

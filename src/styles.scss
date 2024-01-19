@@ -1,0 +1,259 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$holiday-planner-primary: mat.define-palette(mat.$indigo-palette);
+$holiday-planner-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$holiday-planner-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$holiday-planner-theme: mat.define-light-theme((
+  color: (
+    primary: $holiday-planner-primary,
+    accent: $holiday-planner-accent,
+    warn: $holiday-planner-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($holiday-planner-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+:root{
+  --base-green:#50b727;
+  --base-blue:#ff7613;
+  --base-skyblue:#2ce8ff;
+  --base-black:#343434;
+  --base-grey:#777;
+  --base-medium:500;
+  --base-bold:700;
+  --button-primary:#ff7613;
+}
+*{font-family: 'Poppins', sans-serif;font-size: 16px;font-weight: 400;}
+html, body { height: 100%; margin: 0;}
+body{background:#fff;color:#343434}
+img{max-width: 100%;}
+
+h1{font-size: 1.4em;font-weight: 700;}
+h2{font-size: 1.25em;font-weight: 700;}
+h3{font-size: 1.05em;font-weight: 700;}
+h4{font-size: .9em;font-weight: 700;}
+h5{font-size: .85em;font-weight: 700;}
+h6{font-size: .75em;font-weight: 700;}
+p{font-size: .85em;color:#777}
+strong{font-weight: var(--base-bold);}
+.btn{border-radius: 20px;}
+.color-blue{color:var(--base-blue)}
+.color-green{color:var(--base-green)}
+.color-black{color:var(--base-black)}
+.color-grey{color:var(--base-grey)}
+.weight-med{font-weight: 500;}
+#wrapper{position:relative}
+.label-wrapper{font-size: 13px;}
+.container{padding:0 1em;}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {background-color: #f1f7f7 !important;}
+#main-wrapper{max-width: 1024px;margin:0 auto}
+/* Material Resetting */
+mat-hint{font-size:12px}
+.mat-mdc-form-field{width:100%}
+mat-toolbar.mat-toolbar.mat-toolbar-single-row {background: none;padding: 0;}
+#section-nav {
+  .mat-mdc-tab-header {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+    --mdc-secondary-navigation-tab-container-height:80px;
+    p{margin:0}
+  }
+  [role=tablist] .mdc-tab__text-label {
+    display: flex;
+    flex-direction: column;
+    padding:10px 0
+  }
+}
+
+#login-container{
+  .country-selector {
+    left: -15px !important;
+    width: 100px;
+    opacity: 1 !important;
+  }
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  background-color: #ff7613;
+  border-color: #ff7613;
+}
+.ng-image-slider .ng-image-slider-container .main .main-inner .img-div img, .ng-image-slider .ng-image-slider-container .main .main-inner .img-div video{border-radius: 0 !important }
+// .img-div{margin:0 !important}
+.ng-image-slider .ng-image-slider-container .main .next,
+.ng-image-slider .ng-image-slider-container .main .prev{text-decoration: none;}
+.mat-mdc-icon-button.mat-mdc-button-base{padding:12px !important}
+#navbar{
+  position: fixed;
+  left: -150%;
+  top:0;
+  z-index: 100;
+  background: #fff;
+  transition: all .3s ease-in;
+  width: 70%;
+  &.active{
+    left: 0;
+  }
+}
+
+#listing-wrapper{
+  .features {
+    position: relative;
+  }
+  .features ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    position: absolute;
+    top: -40px;
+    padding: 10px;
+    gap: 9px;
+    border-radius: 7px;
+    box-shadow: 0 0 7px 0 rgba(0,0,0,0.25);
+    width: 100%;
+  }
+  .features ul li {
+    font-size: 12px;
+    display: flex;
+    text-wrap: nowrap;
+  }
+  .features ul li mat-icon {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+    margin-right: 2px;
+    color: var(--base-blue)
+  }
+  .locate{
+    mat-icon{font-size: 16px;height: 14px;width: 14px;}
+  }
+
+  .explore-route span{font-size: 1em;font-weight: 600;margin-right: 2px;}
+}
+
+#sticky-footer button {
+  width: 46%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #fff;
+  z-index: 10;
+}
+
+#sticky-footer {
+  display: flex;
+  justify-content: space-evenly;
+  background: #fff;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+#sticky-footer button img{filter:invert(1)}
+#sticky-footer button img, #sticky-footer button mat-icon {
+  font-size: 20px;
+  width: 24px !important;
+  margin-right: 5px;
+}
+#sticky-footer button.call-us{background-color: #ffbb25;}
+#sticky-footer button.whatsapp{background-color: #ff7613;}
+
+#listing-wrapper{padding-bottom:5rem}
+
+.amenities{
+  mat-icon {
+    color: #ff7613;
+    font-size: 1.2em;
+    background: #f1f7f7;
+    padding: 7px;
+    height: 36px !important;
+    width: 36px !important;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+  }
+  mat-icon + div {
+    font-size: .65em;
+  }
+}
+.get-deal{background-color: var(--button-primary);border:none;color:#fff;padding:10px}
+.checked{color: orange}
+.discount p {
+  font-size: 1.4em;
+  line-height: .9em;
+  color: #fff;
+}
+
+.discount p span {
+  font-size: .6em;
+  display: block;
+}
+
+.discount {
+  background: #de3535;
+  padding: 7px 10px 7px 15px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 10;
+  width: 100px;
+  border-radius: 0 40px 40px 0;
+}
+#listing-wrapper {
+  .d-flex{
+    overflow: auto;
+    .card{
+      border-radius: 4px;
+      overflow: hidden;
+      min-width: 280px;
+      img{height:180px}
+      .explore-route{
+        span{font-weight: var(--base-bold);}
+      }
+    }
+  }
+  p{
+    font-size: .75em;
+    margin-bottom: 0;
+  }
+  .amount{
+    font-weight: var(--base-bold);font-size: 1.2em;
+    .actual-price{text-decoration: line-through;font-size: .70em;color: var(--base-grey)}
+  }
+}
+#listing-wrapper h2+ p {
+  font-size: .85em;
+  margin-bottom: 1em;
+}
+

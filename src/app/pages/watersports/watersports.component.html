@@ -1,0 +1,142 @@
+<ng-template [ngIf]="showListing">
+    <div id="wrapper">
+      <header>
+      <div id="toolbar-space"></div>
+      <mat-toolbar class="align-items-start" style="background: url('assets/home-banner.jpg') 0 0 no-repeat !important;">
+        <button (click)="goBack()" mat-icon-button class="example-icon pt-0" aria-label="Example icon-button with menu icon">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1>{{filters.search}}
+        <small>Check-in {{filters.checkin}} <i>.</i> Check-out {{filters.checkout}} <i>.</i> {{filters.type}}</small>
+        </h1>
+
+      </mat-toolbar>
+    </header>
+      <div class="mt-3" id="listing-wrapper">
+        <div class="card" *ngFor="let hotel of hotels" (click)="showListing = false">
+          <div class="d-flex card-slider">
+
+            <ng-image-slider
+              [imageSize]="{ width: '100%', height: 250 }"
+              [showArrow]="false"
+              [autoSlide]="true"
+              [infinite]="true"
+              [animationSpeed]="2"
+              [images]="hotel.img" #nav>
+            </ng-image-slider>
+        </div>
+          <div class="card-body">
+            <div class="features">
+              <ul>
+                <li *ngFor="let item of hotel.features">
+                  <mat-icon>{{item.icon}}</mat-icon> {{item.text}}
+                </li>
+              </ul>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+              <div >
+                <h4>{{hotel.name}}</h4>
+                <div class="d-flex justify-content-between align-item-center">
+                  <p class="locate d-flex align-item-center gap-1"><mat-icon>location_on</mat-icon> {{hotel.location}}</p>
+                  <!-- <p class="amount color-blue">${{hotel.amount}}</p> -->
+                </div>
+              </div>
+              <div class="item-rating">
+                <div>
+                  <div class="ratings">{{hotel.ratings}} <mat-icon>star</mat-icon></div>
+                  <p><small>Very Good</small></p>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p>From</p>
+                <p class="amount color-blue">₹{{hotel.amount}} <span class="actual-price">{{hotel.actualAmount}}</span></p>
+              </div>
+              <div (click)="goToDetail(hotel.pageUrl)" class="explore-route d-flex align-item-center">
+                <span>Explore</span>
+                <mat-icon class="color-blue">trending_flat</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card" *ngFor="let item of list" (click)="showListing = false">
+          <div class="discount">
+            <p>FLAT <span>Rs.500</span></p>
+
+          </div>
+          <div class="d-flex card-slider">
+
+              <ng-image-slider
+                [imageSize]="{ width: '100%', height: 250 }"
+                [showArrow]="false"
+                [autoSlide]="true"
+                [infinite]="true"
+                [animationSpeed]="2"
+                [images]="item.img" #nav>
+              </ng-image-slider>
+            </ng-template>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div class="info">
+                <h2 class="m-0">{{item.name}}</h2>
+                <p class="location">{{item.location}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="amenities pb-3">
+            <div class="container">
+              <h3>Amenities</h3>
+              <div class="d-flex gap-2 align-items-center justify-content-between">
+                <div *ngFor="let ame of item.amenities" class="d-flex flex-column align-items-center">
+                  <mat-icon>{{ame.icon}}</mat-icon>
+                  <div>{{ame.name}}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <hr>
+          <div class="container">
+          <div class="amount-rating d-flex justify-content-between pb-3">
+            <div class="amount">
+              <div class="actual-price">₹{{item.amount}}</div>
+              <div class="discounted-price">₹{{item.amount}}</div>
+              <p>Per Pax</p>
+            </div>
+            <div class="item-rating">
+              <div>
+                <div class="ratings">{{item.ratings}} <mat-icon>star</mat-icon></div>
+                <p><small>Very Good</small></p>
+              </div>
+              <div>
+                <div>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+                <p><small>3 Star Rating</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+          <button class="get-deal">Get Details</button>
+        </div> -->
+      </div>
+
+      <div id="sticky-footer">
+        <button class="call-us"><mat-icon>call</mat-icon> Call Now</button>
+        <button class="whatsapp"><img src="assets/whatsapp_icon.svg" alt=""> Whatsapp</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- <ng-template [ngIf]="!showListing">
+    <app-detailed></app-detailed>
+  </ng-template> -->
+
+

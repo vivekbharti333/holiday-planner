@@ -1,0 +1,66 @@
+<div id="wrapper" class="pb-3">
+  <ng-template [ngIf]="showPayment">
+      <mat-toolbar class="align-items-start">
+        <button routerLink="/home" mat-icon-button class="example-icon pt-0" aria-label="Example icon-button with menu icon">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="d-flex justify-content-between align-items-baseline px-3 pb-3">
+          <h1>Payable Amount</h1>
+          <h1 class="amount">$190</h1>
+        </div>
+
+      </mat-toolbar>
+      <div class="container">
+        <h2>Select Payment Method</h2>
+        <div class="payment-slider d-flex gap-2">
+          <div class="card" *ngFor="let method of paymentMethods">
+            <div class="card-body">
+              <img src="{{method.img}}" alt="{{method.caption}}" width="100px">
+              <h3>{{method.label}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card my-4">
+        <div class="card-body pt-4 pb-5">
+          <form>
+            <mat-form-field>
+              <mat-label>Card Number</mat-label>
+              <input matInput placeholder="Placeholder">
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Name on card</mat-label>
+              <input matInput placeholder="Placeholder">
+            </mat-form-field>
+            <div class="d-flex gap-3">
+              <mat-form-field>
+                <mat-label>Expiry Date</mat-label>
+                <input matInput placeholder="12/23">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Security Code</mat-label>
+                <input matInput placeholder="123">
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+      <button class="btn" id="pay-now" (click)="showPayment=false">Pay Now</button>
+
+  </ng-template>
+  <ng-template [ngIf]="!showPayment">
+    <div class="payment-confirmation">
+      <img src="assets/payment/success.png" alt="" width="90%">
+      <h3 class="my-3">Booked successfully</h3>
+      <p>Hey Sam, you've booked<br>
+      Hyundai Electra successfully.<br>
+      Go to My booking for<br>
+    more booking details.</p>
+    <p>Have a good ride!</p>
+      <button class="btn" (click)="showBooking()">My Bookings</button>
+    </div>
+
+
+  </ng-template>
+</div>

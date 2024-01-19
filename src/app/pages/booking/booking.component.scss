@@ -1,0 +1,57 @@
+#wrapper {
+  background: #efefef;
+  height:100vh;
+  width: 100%;
+  mat-toolbar.mat-toolbar {
+    background: #50b727 !important;
+    z-index: 10;
+    color: #fff;
+    position: relative;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center !important;
+    mat-icon{
+      font-size: 1.4em;
+      height:30px;
+    }
+    h1{font-weight: 500;}
+    .mat-mdc-icon-button.mat-mdc-button-base{
+      padding:0 !important
+    }
+  }
+  .card{margin:2px;border-radius: 0;}
+  p.booking-id {
+    font-size: .8em;
+    margin: 0;
+  }
+
+  p.location {
+    color: #333;
+    margin-top:7px;
+    font-weight: 500;
+    font-size: 0.85em;
+    mat-icon {
+      font-size: 1.2em;
+      height: 15px;
+      width: 15px;
+      color: #50b727;
+    }
+  }
+  .trip-info{
+    label{color:#777;font-size: .8em;}
+    p{color:#333;font-weight: 500;}
+  }
+
+}
+#navbar{
+  position: fixed;
+  left: -150%;
+  top:0;
+  z-index: 100;
+  background: #fff;
+  transition: all .3s ease-in;
+  width: 70%;
+  &.active{
+    left: 0;
+  }
+}

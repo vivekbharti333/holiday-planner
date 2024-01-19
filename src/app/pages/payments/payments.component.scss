@@ -1,0 +1,80 @@
+#wrapper {
+  background: #efefef;
+  height:100vh;
+  width: 100%;
+  mat-toolbar.mat-toolbar {
+    background: var(--base-green) !important;
+    z-index: 10;
+    color: #fff;
+    position: relative;
+    font-size: 1.4em;
+    display: block;
+    align-items: center !important;
+    height: auto;
+    padding-top:5px;
+    mat-icon{
+      font-size: 1.4em;
+      height:30px;
+      width: 35px;
+    }
+    h1{
+      font-weight: 500;
+      font-size: 1.4em;
+      &.amount{font-size: 1.6rem;}
+    }
+    .mat-mdc-icon-button.mat-mdc-button-base{
+      padding:0 !important
+    }
+  }
+  h2 {
+    font-size: 1.4em;
+    font-weight: 400;
+    margin: 20px 0;
+  }
+  .payment-slider{
+    overflow: auto;
+    > div{
+      min-width: 180px;
+      .card-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        h3{
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .card{
+    border:0;
+    border-radius: 0;
+  }
+  .btn{
+    background: var(--base-green);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    color: #fff;
+    padding:20px;
+    font-size: 1.4em;
+  }
+  .payment-confirmation{
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    h3{font-size: 1.4em;}
+    p{
+      font-size: 1.2em;
+      text-align: center;
+    }
+    img{max-width: 320px;}
+  }
+}

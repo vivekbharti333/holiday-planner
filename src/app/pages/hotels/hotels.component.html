@@ -1,0 +1,50 @@
+<ng-template [ngIf]="showListing">
+  <div id="wrapper">
+    <div id="toolbar-space"></div>
+    <mat-toolbar class="align-items-start" style="background: url('assets/home-banner.jpg') 0 0 no-repeat !important;">
+      <button routerLink="/home" mat-icon-button class="example-icon pt-0" aria-label="Example icon-button with menu icon">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>{{filters.search}}
+      <small>Check-in {{filters.checkin}} <i>.</i> Check-out {{filters.checkout}} <i>.</i> {{filters.type}}</small>
+      </h1>
+
+    </mat-toolbar>
+    <div class="mt-4">
+      <div class="card" *ngFor="let item of list" (click)="showListing = false">
+        <div class="d-flex card-slider">
+          <img src="{{image.url}}" alt="{{image.caption}}" *ngFor="let image of item.img">
+        </div>
+        <div class="ratings">{{item.ratings}} <mat-icon>star</mat-icon></div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div class="info">
+              <h3>{{item.name}}</h3>
+              <p class="location">{{item.location}}</p>
+            </div>
+            <div class="amount-info">
+              <div class="amount text-end">₹{{item.amount}}</div>
+              <p>For {{item.guests}} Guests</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex gap-2 align-items-center justify-content-between">
+            <span *ngFor="let ame of item.amenities">
+              <mat-icon>{{ame.icon}}</mat-icon> {{ame.name}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="sticky-bottom d-flex">
+      <button class="btn flex-fill"><mat-icon>tune</mat-icon> Filters</button>
+      <button class="btn flex-fill"><mat-icon>map</mat-icon> Map View</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="!showListing">
+  <app-detailed></app-detailed>
+</ng-template>

@@ -1,0 +1,45 @@
+<div id="wrapper">
+  <mat-toolbar class="align-items-start">
+    <button (click)="navOpen = !navOpen" mat-icon-button class="example-icon pt-0" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>My Bookings</h1>
+  </mat-toolbar>
+  <div id="navbar" [class.active]="navOpen">
+    <div class="d-flex justify-content-end p-2" (click)="navOpen = false"><mat-icon>close</mat-icon></div>
+    <app-navbar></app-navbar>
+  </div>
+  <div id="booking-listing">
+    <div class="card" *ngFor="let booking of bookings">
+      <div class="card-body">
+        <div class="d-flex gap-2 justify-content-between">
+          <div>
+            <h2>{{booking.name}}</h2>
+            <p class="booking-id">Booking ID {{booking.id}}</p>
+            <p class="location"><mat-icon>location_on</mat-icon> {{booking.location}}</p>
+          </div>
+          <div style="width: 40%;">
+            <div class="img-container">
+              <img src="{{booking.img}}" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-between trip-info">
+          <div>
+            <label>Trip Start</label>
+            <p>{{booking.start}}</p>
+          </div>
+          <div>
+            <label>Trip End</label>
+            <p>{{booking.end}}</p>
+          </div>
+          <div>
+            <label>Paid via Credit Card</label>
+            <p>{{booking.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
