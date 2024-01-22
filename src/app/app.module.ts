@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedMaterialModule } from './shared-material/shared-material.module';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { WatersportsdetailedpageComponent } from './pages/hotels/watersportsdetailedpage/watersportsdetailedpage.component';
 
@@ -18,7 +18,8 @@ import { WatersportsdetailedpageComponent } from './pages/hotels/watersportsdeta
     BrowserAnimationsModule,
     SharedMaterialModule,
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
