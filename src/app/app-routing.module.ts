@@ -19,6 +19,10 @@ const routes: Routes = [
     path:'payments',
     loadChildren: ()=> import('./pages/payments/payments.module').then((m) => m.PaymentsModule),
   },
+  {
+    path:'login',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
 
 
   //{ path: '**', redirectTo:'/login' }, // Handle 404 errors

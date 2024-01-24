@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
 
+
 @Component({
   selector: 'app-detailed',
   templateUrl: './detailed.component.html',
@@ -20,6 +21,7 @@ export class DetailedComponent {
   }
 
   showBookingDetails:boolean = false;
+  showLoginPage: Boolean = false;
   
   imageObject: any[] =[
     {
