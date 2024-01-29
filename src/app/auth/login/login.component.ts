@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth.service';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,14 @@ export class LoginComponent {
   otpInputDisabled: boolean = false;
 
 
-  constructor(private formBuilder:FormBuilder, private _router:Router, private cookieService: CookieService, private authService:AuthService){
+  constructor(
+    private formBuilder:FormBuilder,
+    private _router:Router, 
+    private cookieService: CookieService,
+    private toastr: ToastrService,
+    private mainService: MainService, 
+    private authService:AuthService)
+    {
     this.myForm = this.formBuilder.group({
       countryCode : [''],
       phone : [' '],
@@ -49,13 +58,13 @@ export class LoginComponent {
           if (response['responseCode'] == '200') {
             if (response['payload']['respCode'] == '200') {
               console.log("ok hai")
-
+              this.toastr.success(response['responseMessage'], response['responseCode']);
               this.showLogin = false;
               this.startTimer();
-              
+              this.toastr.success(response['responseMessage'], response['responseCode']);
               //this.isLoading = false;
             } else {
-              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
+               this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
               // this.isLoading = false;
             }
           } else {
@@ -97,9 +106,45 @@ export class LoginComponent {
              
               let bookingDetails = this.cookieService.get('bookingDetails');
               if(bookingDetails != "" || bookingDetails != ""){
+                this.doBooking(bookingDetails)
                 this._router.navigate(['/'])
               }else{
                 // call booking api
+                console.log(bookingDetails);
+                this.doBooking(bookingDetails)
+                this._router.navigate(['/'])
+              }
+              
+              //this.isLoading = false;
+            } else {
+              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
+              // this.isLoading = false;
+            }
+          } else {
+            // this.toastr.error(response['responseMessage'], response['responseCode']);
+            // this.isLoading = false;
+          }
+        },
+       // error: (error: any) => this.toastr.error('Server Error', '500'),
+        
+      });
+  }
+
+  doBooking(bookingDetails : any){
+
+    this.mainService.doBooking(bookingDetails)
+      .subscribe({
+        next: (response: any) => {
+          if (response['responseCode'] == '200') {
+            if (response['payload']['respCode'] == '200') {
+             
+              let bookingDetails = this.cookieService.get('bookingDetails');
+              if(bookingDetails != "" || bookingDetails != ""){
+
+                this._router.navigate(['/'])
+              }else{
+                // call booking api
+                console.log(bookingDetails)
                 this._router.navigate(['/'])
               }
               
@@ -122,6 +167,7 @@ export class LoginComponent {
   resendOtp(){
     this.time=60;
     this.showResend = false;
+    this.otpInputDisabled = false;
   }
   startTimer(){
     setInterval(() => {
