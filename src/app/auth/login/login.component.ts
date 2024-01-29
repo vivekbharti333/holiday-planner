@@ -15,17 +15,30 @@ export class LoginComponent {
   showLogin: boolean = true;
   myForm:FormGroup;
   otp:any ='';
-  time:any = 30;
+  time:any = 60;
   showResend:boolean = false;
+
 
   constructor(private formBuilder:FormBuilder, private _router:Router, private cookieService: CookieService,){
     this.myForm = this.formBuilder.group({
+      dialCode : [''],
       phone : [' '],
     })
   }
 
+  getOtp() {
+    var formValues = this.myForm.value;
+    this.mobileNumber = formValues.phone;
+
+    console.log("Mobile no.: "+this.mobileNumber)
+
+    this.showLogin = false;
+    this.startTimer();
+
+  }
+
   submitPhone(){
-    console.log("Enter submitPhone() ");
+    console.log("Enter submitPhone() and Otp is "+this.otp);
     if(this.otp=='11111'){
 
       let bookingDetails = this.cookieService.get('bookingDetails');
@@ -36,8 +49,8 @@ export class LoginComponent {
         }
     }
   }
-  resetTimer(){
-    this.time=30;
+  resendOtp(){
+    this.time=60;
     this.showResend = false;
   }
   startTimer(){
