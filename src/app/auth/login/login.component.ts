@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth.service';
 import { MainService } from 'src/app/services/main.service';
+import { BookingDetails } from 'src/app/interface/booking-details';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,25 @@ export class LoginComponent {
   time:any = 60;
   showResend:boolean = false;
   otpInputDisabled: boolean = false;
+  public bookingDetails: BookingDetails = {
+    city: "",
+    customerName: "",
+    customerMobile: "",
+    countryCode: "",
+    areaFrom: "",
+    areaTo: "",
+    fromDate: "",
+    toDate: "",
+    pickupTime: "",
+    deliveryTime: "",
+    vehicleType: "",
+    vehicleDetailsType: "",
+    vehicleName: "",
+    vehicleBrand: "",
+    createdBy: "",
+    createdbyName: "",
+}
+  
 
 
   constructor(
@@ -29,7 +49,8 @@ export class LoginComponent {
     private cookieService: CookieService,
     private toastr: ToastrService,
     private mainService: MainService, 
-    private authService:AuthService)
+    private authService:AuthService,
+     )
     {
     this.myForm = this.formBuilder.group({
       countryCode : [''],
@@ -105,60 +126,47 @@ export class LoginComponent {
             if (response['payload']['respCode'] == '200') {
              
               let bookingDetails = this.cookieService.get('bookingDetails');
+
               if(bookingDetails != "" || bookingDetails != ""){
-                this.doBooking(bookingDetails)
-                this._router.navigate(['/'])
+                this.doBooking()
+                // this._router.navigate(['/'])
               }else{
-                // call booking api
-                console.log(bookingDetails);
-                this.doBooking(bookingDetails)
                 this._router.navigate(['/'])
               }
-              
-              //this.isLoading = false;
             } else {
-              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
-              // this.isLoading = false;
+              this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
             }
           } else {
-            // this.toastr.error(response['responseMessage'], response['responseCode']);
-            // this.isLoading = false;
+            this.toastr.error(response['responseMessage'], response['responseCode']);
           }
         },
-       // error: (error: any) => this.toastr.error('Server Error', '500'),
+       error: (error: any) => this.toastr.error('Server Error', '500'),
         
       });
   }
 
-  doBooking(bookingDetails : any){
+  doBooking(){         
+    const bookingDetailsString = this.cookieService.get('bookingDetails');
+    this.bookingDetails = JSON.parse(bookingDetailsString);
+    const fromDateValue = this.bookingDetails.fromDate;
+    console.log('fromDateValue:', fromDateValue);
 
-    this.mainService.doBooking(bookingDetails)
+    this.mainService.doBooking(this.bookingDetails)
       .subscribe({
         next: (response: any) => {
           if (response['responseCode'] == '200') {
             if (response['payload']['respCode'] == '200') {
              
-              let bookingDetails = this.cookieService.get('bookingDetails');
-              if(bookingDetails != "" || bookingDetails != ""){
-
-                this._router.navigate(['/'])
-              }else{
-                // call booking api
-                console.log(bookingDetails)
-                this._router.navigate(['/'])
-              }
+              this._router.navigate(['/'])
               
-              //this.isLoading = false;
             } else {
-              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
-              // this.isLoading = false;
+              this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
             }
           } else {
-            // this.toastr.error(response['responseMessage'], response['responseCode']);
-            // this.isLoading = false;
+            this.toastr.error(response['responseMessage'], response['responseCode']);
           }
         },
-       // error: (error: any) => this.toastr.error('Server Error', '500'),
+       error: (error: any) => this.toastr.error('Server Error', '500'),
         
       });
   }
