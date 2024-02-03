@@ -40,12 +40,12 @@ export class BookingDetailsComponent {
       toDate: [''],
       pickupTime: [''],
       deliveryTime: [''],
+      vehicleQuantity: [''],
       vehicleType: [''],
       vehicleDetailsType: [''],
       vehicleName: [''],
       vehicleBrand: [''],
-      createdBy: [''],
-      createdbyName: ['']
+     
     });
   }
 
