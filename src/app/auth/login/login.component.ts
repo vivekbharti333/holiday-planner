@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,12 @@ export class LoginComponent {
   showResend:boolean = false;
 
 
-  constructor(private formBuilder:FormBuilder, private _router:Router, private cookieService: CookieService,){
+  constructor(
+    private formBuilder:FormBuilder,
+    private _router:Router, 
+    private cookieService: CookieService,
+    private authService: AuthService)
+    {
     this.myForm = this.formBuilder.group({
       dialCode : [''],
       phone : [' '],
@@ -34,8 +40,38 @@ export class LoginComponent {
 
     this.showLogin = false;
     this.startTimer();
-
   }
+
+  public getOtp1() {
+    // this.isLoading = true;
+    var formValues = this.myForm.value;
+    this.mobileNumber = formValues.phone;
+    this.authService.sendOtp(this.myForm.value)
+      .subscribe({
+        next: (response: any) => {
+          if (response['responseCode'] == '200') {
+            if (response['payload']['respCode'] == '200') {
+              console.log("ok hai")
+              // this.toastr.success(response['payload']['respMesg'], response['payload']['respCode']);
+              // this.addDonationForm.reset();
+              // this.setValueInForm();
+              // this.isLoading = false;
+            } else {
+              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
+              // this.isLoading = false;
+            }
+          } else {
+            // this.toastr.error(response['responseMessage'], response['responseCode']);
+            // this.isLoading = false;
+          }
+        },
+        // error: (error: any) => this.toastr.error('Server Error', '500'),
+        
+      });
+  }
+
+
+
 
   submitPhone(){
     console.log("Enter submitPhone() and Otp is "+this.otp);
