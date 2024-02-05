@@ -13,6 +13,21 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
+<<<<<<< HEAD
+  sendOtp(userDetails: any): Observable<any> {
+    let request: any = {
+      payload: {
+        "countryCode":"+91",
+        "customerMobile":userDetails.phone
+        // requestFor: 'DROPDOWN',
+        // token: this.loginUser['token'],
+        // createdBy: this.loginUser['loginId'],
+        // superadminId: this.loginUser['superadminId'],
+      }
+    };
+    return this.http.post<any>( "generateLoginOtp", request);
+  }
+=======
 
 
   sendLoginOtp(formValue: any): Observable<any> {
@@ -38,4 +53,5 @@ export class AuthService {
   }
 
 
+>>>>>>> 7557cdb220a5fa3816ff290abf7b5893aeb4a195
 }

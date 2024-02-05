@@ -4,8 +4,11 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth.service';
+<<<<<<< HEAD
+=======
 import { MainService } from 'src/app/services/main.service';
 import { BookingDetails } from 'src/app/interface/booking-details';
+>>>>>>> 7557cdb220a5fa3816ff290abf7b5893aeb4a195
 
 @Component({
   selector: 'app-login',
@@ -47,10 +50,14 @@ export class LoginComponent {
     private formBuilder:FormBuilder,
     private _router:Router, 
     private cookieService: CookieService,
+<<<<<<< HEAD
+    private authService: AuthService)
+=======
     private toastr: ToastrService,
     private mainService: MainService, 
     private authService:AuthService,
      )
+>>>>>>> 7557cdb220a5fa3816ff290abf7b5893aeb4a195
     {
     this.myForm = this.formBuilder.group({
       countryCode : [''],
@@ -73,6 +80,44 @@ export class LoginComponent {
     this.selectedCountry = formValues.countryCode;
     this.mobileNumber = formValues.phone;
 
+<<<<<<< HEAD
+    console.log("Mobile no.: "+this.mobileNumber)
+
+    this.showLogin = false;
+    this.startTimer();
+  }
+
+  public getOtp1() {
+    // this.isLoading = true;
+    var formValues = this.myForm.value;
+    this.mobileNumber = formValues.phone;
+    this.authService.sendOtp(this.myForm.value)
+      .subscribe({
+        next: (response: any) => {
+          if (response['responseCode'] == '200') {
+            if (response['payload']['respCode'] == '200') {
+              console.log("ok hai")
+              // this.toastr.success(response['payload']['respMesg'], response['payload']['respCode']);
+              // this.addDonationForm.reset();
+              // this.setValueInForm();
+              // this.isLoading = false;
+            } else {
+              // this.toastr.error(response['payload']['respMesg'], response['payload']['respCode']);
+              // this.isLoading = false;
+            }
+          } else {
+            // this.toastr.error(response['responseMessage'], response['responseCode']);
+            // this.isLoading = false;
+          }
+        },
+        // error: (error: any) => this.toastr.error('Server Error', '500'),
+        
+      });
+  }
+
+
+
+=======
     this.authService.sendLoginOtp(this.myForm.value)
       .subscribe({
         next: (response: any) => {
@@ -113,6 +158,7 @@ export class LoginComponent {
   //       }
   //   }
   // }
+>>>>>>> 7557cdb220a5fa3816ff290abf7b5893aeb4a195
 
   submitPhone(){
     const otpLength = this.otp.length
