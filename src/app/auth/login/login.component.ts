@@ -124,6 +124,11 @@ export class LoginComponent {
         next: (response: any) => {
           if (response['responseCode'] == '200') {
             if (response['payload']['respCode'] == '200') {
+
+              //Set cookies for login details
+              let expiredDate = new Date();
+              expiredDate.setDate(expiredDate.getDate() + 1);
+              this.cookieService.set('loginDetails', this.mobileNumber, expiredDate);
              
               let bookingDetails = this.cookieService.get('bookingDetails');
 
@@ -157,6 +162,7 @@ export class LoginComponent {
           if (response['responseCode'] == '200') {
             if (response['payload']['respCode'] == '200') {
              
+              this.cookieService.delete('bookingDetails');
               this._router.navigate(['/'])
               
             } else {

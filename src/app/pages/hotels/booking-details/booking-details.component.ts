@@ -74,32 +74,34 @@ export class BookingDetailsComponent {
 // }
 
 bookDetails(){
-  console.log("Entyer 1");
   let loginDetails = this.cookieService.get('loginDetails');
-  console.log("Entyer 2 : "+loginDetails);
+  console.log("Login Details : "+loginDetails)
   if (loginDetails === null || loginDetails === ' ') {
     // insert mobile no into form
+    
     // call booking api
     //
 
-    console.log("Entyer 3");
    }else{
-
-    console.log("Entyer 4")
+    //Get value from url
+    this.activeUrlSegments = this.route.snapshot.url.map(segment => segment.path);
+    if (this.activeUrlSegments.length > 0) {
+      const firstSegment = this.activeUrlSegments[0];
+      const secondSegment = this.activeUrlSegments[1];
+  
+      //set remening value into form
+      this.bookingForm.patchValue({
+        vehicleName:secondSegment,
+        vehicleType:"WATERSPORTS",
+        vehicleBrand:"",
+        vehicleDetailsType:""
+      }
+      );
 
     let expiredDate = new Date();
     expiredDate.setDate(expiredDate.getDate() + 1);
     this.cookieService.set('bookingDetails', JSON.stringify(this.bookingForm.value), expiredDate);
-    console.log("Entyer 5")
-    this.activeUrlSegments = this.route.snapshot.url.map(segment => segment.path);
-    
-    // Now you can use this.activeUrlSegments as needed, for example:
-    if (this.activeUrlSegments.length > 0) {
-      const firstSegment = this.activeUrlSegments[0];
-      const secondSegment = this.activeUrlSegments[1];
-      console.log("Entyer 6")
-      this.bookingForm.get('vehicleName')!.setValue(secondSegment); // Non-null assertion here
-      console.log("Entyer 7")
+
      this.router.navigate(['/login']);
    }
 
