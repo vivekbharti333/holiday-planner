@@ -191,6 +191,7 @@ export class LoginComponent {
           if (response['responseCode'] == '200') {
             if (response['payload']['respCode'] == '200') {
              
+              this.cookieService.delete('bookingDetails');
               this._router.navigate(['/'])
               
             } else {
