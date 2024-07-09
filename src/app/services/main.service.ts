@@ -20,16 +20,16 @@ export class MainService {
     console.log("Booking Values : "+bookingValue.areaFrom);
     let request: any = {
       payload: {
-        // vehicleType:"WATER-SPORT",
-        // vehicleDetailsType: bookingValue.vehicleName,
-        // vehicleName: bookingValue.vehicleName,
-        // vehicleBrand: bookingValue.vehicleName,
-        // customerMobile: bookingValue.customerMobile,
-        // countryCode: bookingValue.countryCode,
-        // areaFrom: bookingValue.areaFrom,
-        // areaTo: bookingValue.areaTo,
-        // fromDate: bookingValue.fromDate,
-        // toDate: bookingValue.toDate
+        vehicleType:"WATER-SPORT",
+        vehicleDetailsType: bookingValue.vehicleName,
+        vehicleName: bookingValue.vehicleName,
+        vehicleBrand: bookingValue.vehicleName,
+        customerMobile: bookingValue.customerMobile,
+        countryCode: bookingValue.countryCode,
+        areaFrom: bookingValue.areaFrom,
+        areaTo: bookingValue.areaTo,
+        fromDate: bookingValue.fromDate,
+        toDate: bookingValue.toDate
       }
     };
     return this.http.post<any>( ConstantsService.Site_Url+"vehicleBookingByApp", request);
